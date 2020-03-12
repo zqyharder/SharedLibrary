@@ -57,7 +57,7 @@ class Index extends Component {
       success: function() {
         console.log('调用成功')
       },
-      fali:console.error
+      fail:console.error
   })
   }
 //   componentWillUnmount () { }
@@ -72,17 +72,23 @@ class Index extends Component {
     })
   }
   comment = ()=>{
-    // console.log('点击成功')
-    // let myDate=new Date()
-    // db.collection('doubanbooks').doc(id).update({
-    //   data:{
-    //     comments:db.command.push({
-    //       author:this.state.userInfo.nickName,
-    //       content:this.state.value,
-    //       date:myDate.toLocaleDateString()
-    //     })
-    //   }
-    // })
+    // console.log(this.state.value)
+    let id = this.$router.params.id
+    let author=this.state.userInfo.nickName
+    let content=this.state.value
+    wx.cloud.callFunction({
+      name:'addcomments',
+      data:{id,author,content},
+      success: res=> {
+        // console.log(res)
+        this.setState({
+          value:''
+        })
+        this.init()
+      }
+     
+    })
+    
     
   }
   toHome=(id)=>{
@@ -129,7 +135,7 @@ class Index extends Component {
           }
         </View>
 
-        {/* {
+        {
           this.state.userInfo.openid && <View>
 
             <AtTextarea
@@ -137,10 +143,10 @@ class Index extends Component {
               onChange = {this.handleChange}
             >
             </AtTextarea>
-            <AtButton type='primary' onClick={this.comment()}>提交</AtButton>
-            <View onClick={this.comment}>测试</View>
+            <AtButton type='primary' onClick={this.comment}>提交</AtButton>
+            {/* <View onClick={this.comment}>测试</View> */}
           </View>
-        } */}
+        }
       </View>
     )
   }
