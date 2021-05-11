@@ -45,7 +45,7 @@
     "axios": "^0.19.2",
     "cheerio": "^1.0.0-rc.3",
     "doubanbook": "^1.0.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mobx": "4.8.0",
     "mobx-react": "^6.1.8",
     "nerv-devtools": "^1.5.5",
